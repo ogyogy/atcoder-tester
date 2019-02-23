@@ -27,13 +27,12 @@ $ pip install beautifulsoup4
 $ pip install colorama
 ```
 
-## (Option) Pythonをexeに変換する
-### PyInstallerをインストール
-[開発環境/インストール方法](#ライブラリ)
+## (Option)Pythonをexeに変換する
+[Pythonパッケージ](#Pythonパッケージ)と、PyInstallerをインストール
 ```
 $ pip install pyinstaller
 ```
-### Pythonをexeに変換
+Pythonをexeに変換
 ```
 $ pyinstaller atcoder-scraper.py --onefile --clean
 ```
@@ -42,11 +41,13 @@ dist/atcoder-scraper.exeが生成される
 PyInstallerの使い方の詳細は[Using PyInstaller — PyInstaller 3.4 documentation](https://pyinstaller.readthedocs.io/en/stable/usage.html)
 
 ## 使い方
-
+### Python
 ```
 $ python atcoder-scraper.py [-h] [-t] [-n] [-d] url
 ```
-exeに変換したときは
+
+### (Option)exe
+[Python](#Python)で実行できる状態で、[(Option)Pythonをexeに変換する](#OptionPythonをexeに変換する) を実施する必要がある
 ```
 $ atcoder-scraper.exe [-h] [-t] [-n] [-d] url
 ```
