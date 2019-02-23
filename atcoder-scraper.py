@@ -11,7 +11,7 @@ from colorama import Fore  # , Back, Style
 
 colorama.init(autoreset=True)
 
-parser = argparse.ArgumentParser(description='Atcoderの入出力例を取得')
+parser = argparse.ArgumentParser(description='Atcoderの問題の入出力例を取得')
 parser.add_argument('url', help='AtCoderの問題のURL')
 parser.add_argument('-t', '--test', action='store_true', help='コンパイル&テストを実行')
 parser.add_argument('-n', '--nodownload',
