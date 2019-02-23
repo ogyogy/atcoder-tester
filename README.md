@@ -10,7 +10,7 @@ Atcoderの問題の入出力例を取得
 ### 言語
 - Python 3.7.1
 
-### ライブラリ
+### Pythonパッケージ
 
 |ライブラリ|機能|
 |---|---|
@@ -18,18 +18,22 @@ Atcoderの問題の入出力例を取得
 |[BeautifulSoup](https://www.crummy.com/software/BeautifulSoup/bs4/doc/)|HTMLの解析|
 |[colorama](https://pypi.org/project/colorama/)|文字色の設定|
 
+
+pipでインストール
+
 ```
 $ pip install requests
 $ pip install beautifulsoup4
 $ pip install colorama
 ```
 
-### (Option) Pythonをexeに変換する
-PyInstallerをインストール
+## (Option) Pythonをexeに変換する
+### PyInstallerをインストール
+[開発環境/インストール方法](#ライブラリ)
 ```
 $ pip install pyinstaller
 ```
-Pythonをexeに変換するには
+### Pythonをexeに変換
 ```
 $ pyinstaller atcoder-scraper.py --onefile --clean
 ```
@@ -37,7 +41,7 @@ dist/atcoder-scraper.exeが生成される
 
 PyInstallerの使い方の詳細は[Using PyInstaller — PyInstaller 3.4 documentation](https://pyinstaller.readthedocs.io/en/stable/usage.html)
 
-# 使い方
+## 使い方
 
 ```
 $ python atcoder-scraper.py [-h] [-t] [-n] [-d] url
