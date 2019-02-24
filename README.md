@@ -7,6 +7,9 @@ Atcoderの問題の入出力例を取得
 ### OS
 - Windows 10
 
+### シェル
+- [Git for Windows](https://gitforwindows.org/)
+
 ### 言語
 - Python 3.7.1
 
@@ -60,7 +63,7 @@ $ python atcoder-scraper.py [-h] [-t] [-n] [-d] url
 ### (Option)exe
 [Python](#Python)で実行できる状態で、[(Option)Pythonをexeに変換する](#OptionPythonをexeに変換する) を実施する必要がある
 ```
-$ atcoder-scraper.exe [-h] [-t] [-n] [-d] url
+$ ./atcoder-scraper.exe [-h] [-t] [-n] [-d] url
 ```
 
 ### オプション
