@@ -41,6 +41,17 @@ dist/atcoder-scraper.exeが生成される
 PyInstallerの使い方の詳細は[Using PyInstaller — PyInstaller 3.4 documentation](https://pyinstaller.readthedocs.io/en/stable/usage.html)
 
 ## 使い方
+### 初期設定
+
+設定ファイルをsetting.jsonという名前で作成し、実行ファイル(pyまたはexe)と同じディレクトリに格納
+
+```
+{
+    "username": "xxxx",
+    "password": "1234"
+}
+```
+
 ### Python
 ```
 $ python atcoder-scraper.py [-h] [-t] [-n] [-d] url

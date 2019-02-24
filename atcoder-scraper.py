@@ -7,7 +7,8 @@ import subprocess
 import glob
 import re
 import colorama
-from colorama import Fore  # , Back, Style
+from colorama import Fore, Back, Style
+import json
 
 colorama.init(autoreset=True)
 
@@ -27,8 +28,38 @@ sourcename = 'main'
 if not os.path.isdir(testcase_dir):
     os.makedirs(testcase_dir)
 
-r = requests.get(target_url)
+login_url = 'https://atcoder.jp/login/'
+
+s = requests.Session()
+
+r = s.get(login_url)
 soup = BeautifulSoup(r.text, 'html.parser')
+csrf_token = soup.find(attrs={'name': 'csrf_token'}).get('value')
+
+with open('setting.json', 'r') as f:
+    d = json.load(f)
+    payload = {
+        'csrf_token': csrf_token,
+        'username': d['username'],
+        'password': d['password'],
+    }
+
+r = s.post(login_url, data=payload)
+
+if r.status_code == 200:
+    print(Fore.GREEN + 'LOGIN SUCCESS')
+else:
+    print(Fore.RED + 'LOGIN FAILURE {} {}'.format(r.status_code, r.reason))
+    exit()
+
+r = s.get(target_url)
+soup = BeautifulSoup(r.text, 'html.parser')
+
+if r.status_code == 200:
+    print(Fore.GREEN + 'GET SUCCESS')
+else:
+    print(Fore.RED + 'GET FAILURE {} {}'.format(r.status_code, r.reason))
+    exit()
 
 in_idx = 1
 out_idx = 1
@@ -79,16 +110,19 @@ if args.test:
             expected = f.read().rstrip()
             ans = res.stdout.decode().rstrip()
             if ans.strip() == expected.strip():
-                print(Fore.GREEN + 'AC')
+                print(Fore.BLACK + Back.GREEN + 'AC')
                 if args.debug:
                     print(Fore.GREEN + 'expected = {}'.format(expected))
                     print(Fore.GREEN + 'answer = {}'.format(ans))
                 ac_cnt += 1
             else:
-                print(Fore.YELLOW + 'WA')
+                print(Fore.BLACK + Back.YELLOW + 'WA')
                 print(Fore.YELLOW + 'expected = {}'.format(expected))
                 print(Fore.YELLOW + 'answer = {}'.format(ans))
                 wa_cnt += 1
     print('==========\nRESULT\n==========')
-    print('AC = {}, WA = {}'.format(ac_cnt, wa_cnt))
-    print(Fore.GREEN + 'AC') if wa_cnt == 0 else print(Fore.YELLOW + 'WA')
+    print('AC = {}, WA = {}'.format(ac_cnt, wa_cnt), end=' ')
+    if wa_cnt == 0:
+        print(Fore.BLACK + Back.GREEN + 'AC')
+    else:
+        print(Fore.BLACK + Back.YELLOW + 'WA')
