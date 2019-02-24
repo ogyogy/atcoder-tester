@@ -7,63 +7,82 @@ import subprocess
 import glob
 import re
 import colorama
-from colorama import Fore, Back, Style
+from colorama import Fore, Back
 import json
 
 colorama.init(autoreset=True)
 
 parser = argparse.ArgumentParser(description='Atcoderの問題の入出力例を取得')
-parser.add_argument('url', help='AtCoderの問題のURL')
+parser.add_argument('-u', '--url', help='AtCoderの問題のURL')
 parser.add_argument('-t', '--test', action='store_true', help='コンパイル&テストを実行')
 parser.add_argument('-n', '--nodownload',
                     action='store_true', help='入出力例をダウンロードしない')
 parser.add_argument('-d', '--debug',
                     action='store_true', help='AC時に入力例と出力を表示')
+parser.add_argument('-c', '--clean',
+                    action='store_true', help='自動生成したファイルを削除')
 args = parser.parse_args()
 
-target_url = args.url
-testcase_dir = 'testcase'
-sourcename = 'main'
+if args.clean:
+    if os.path.isfile('a.exe'):
+        cmd = 'del a.exe'
+        res = subprocess.run(cmd, stdout=subprocess.PIPE,
+                             stderr=subprocess.STDOUT, shell=True)
+        if res.returncode != 0:
+            print(res.stdout.decode('sjis'))
+            exit()
+    if os.path.isdir('testcase'):
+        cmd = 'rd /s /q testcase'
+        res = subprocess.run(cmd, stdout=subprocess.PIPE,
+                             stderr=subprocess.STDOUT, shell=True)
+        if res.returncode != 0:
+            print(res.stdout.decode('sjis'))
+            exit()
 
-if not os.path.isdir(testcase_dir):
-    os.makedirs(testcase_dir)
+if args.url:
+    target_url = args.url
+    testcase_dir = 'testcase'
+    sourcename = 'main'
 
-login_url = 'https://atcoder.jp/login/'
+    if not os.path.isdir(testcase_dir):
+        os.makedirs(testcase_dir)
 
-s = requests.Session()
+    login_url = 'https://atcoder.jp/login/'
 
-r = s.get(login_url)
-soup = BeautifulSoup(r.text, 'html.parser')
-csrf_token = soup.find(attrs={'name': 'csrf_token'}).get('value')
+    s = requests.Session()
 
-with open('setting.json', 'r') as f:
-    d = json.load(f)
-    payload = {
-        'csrf_token': csrf_token,
-        'username': d['username'],
-        'password': d['password'],
-    }
+    r = s.get(login_url)
+    soup = BeautifulSoup(r.text, 'html.parser')
+    csrf_token = soup.find(attrs={'name': 'csrf_token'}).get('value')
 
-r = s.post(login_url, data=payload)
+    with open('setting.json', 'r') as f:
+        d = json.load(f)
+        payload = {
+            'csrf_token': csrf_token,
+            'username': d['username'],
+            'password': d['password'],
+        }
 
-if r.status_code == 200:
-    print(Fore.GREEN + 'LOGIN SUCCESS')
-else:
-    print(Fore.RED + 'LOGIN FAILURE {} {}'.format(r.status_code, r.reason))
-    exit()
+    r = s.post(login_url, data=payload)
 
-r = s.get(target_url)
-soup = BeautifulSoup(r.text, 'html.parser')
+    if r.status_code == 200:
+        print(Fore.GREEN + 'LOGIN SUCCESS')
+    else:
+        print(Fore.RED + 'LOGIN FAILURE {} {}'.format(r.status_code, r.reason))
+        exit()
 
-if r.status_code == 200:
-    print(Fore.GREEN + 'GET SUCCESS')
-else:
-    print(Fore.RED + 'GET FAILURE {} {}'.format(r.status_code, r.reason))
-    exit()
+    r = s.get(target_url)
+    soup = BeautifulSoup(r.text, 'html.parser')
 
-in_idx = 1
-out_idx = 1
-if not args.nodownload:
+    if r.status_code == 200:
+        print(Fore.GREEN + 'GET SUCCESS')
+    else:
+        print(Fore.RED + 'GET FAILURE {} {}'.format(r.status_code, r.reason))
+        exit()
+
+if not args.nodownload and not args.clean:
+    in_idx = 1
+    out_idx = 1
     for part in soup.select('.part'):
         h3 = part.h3.text
         if '入力例' in h3:
@@ -85,7 +104,8 @@ if args.test:
     # compile
     print('==========\nBUILD\n==========')
     cmd = 'g++ {}.cpp'.format(sourcename)
-    res = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+    res = subprocess.run(cmd, stdout=subprocess.PIPE,
+                         stderr=subprocess.STDOUT, shell=True)
     if res.returncode != 0:
         print(res.stdout.decode('sjis'))
         exit()
