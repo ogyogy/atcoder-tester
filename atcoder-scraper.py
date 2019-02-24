@@ -15,8 +15,6 @@ colorama.init(autoreset=True)
 parser = argparse.ArgumentParser(description='Atcoderの問題の入出力例を取得')
 parser.add_argument('-u', '--url', help='AtCoderの問題のURL')
 parser.add_argument('-t', '--test', action='store_true', help='コンパイル&テストを実行')
-parser.add_argument('-n', '--nodownload',
-                    action='store_true', help='入出力例をダウンロードしない')
 parser.add_argument('-d', '--debug',
                     action='store_true', help='AC時に入力例と出力を表示')
 parser.add_argument('-c', '--clean',
@@ -80,7 +78,6 @@ if args.url:
         print(Fore.RED + 'GET FAILURE {} {}'.format(r.status_code, r.reason))
         exit()
 
-if not args.nodownload and not args.clean:
     in_idx = 1
     out_idx = 1
     for part in soup.select('.part'):

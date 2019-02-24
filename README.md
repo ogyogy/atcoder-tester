@@ -57,13 +57,13 @@ PyInstallerの使い方の詳細は[Using PyInstaller — PyInstaller 3.4 docume
 
 ### Python
 ```
-$ python atcoder-scraper.py [-h] [-u URL] [-t] [-n] [-d] [-c]
+$ python atcoder-scraper.py [-h] [-u URL] [-t] [-d] [-c]
 ```
 
 ### (Option)exe
 [Python](#Python)で実行できる状態で、[(Option)Pythonをexeに変換する](#OptionPythonをexeに変換する) を実施する必要がある
 ```
-$ ./atcoder-scraper.exe [-h] [-u URL] [-t] [-n] [-d] [-c]
+$ ./atcoder-scraper.exe [-h] [-u URL] [-t] [-d] [-c]
 ```
 
 ### オプション
@@ -72,7 +72,6 @@ optional arguments:
   -h, --help         show this help message and exit
   -u URL, --url URL  AtCoderの問題のURL
   -t, --test         コンパイル&テストを実行
-  -n, --nodownload   入出力例をダウンロードしない
   -d, --debug        AC時に入力例と出力を表示
   -c, --clean        自動生成したファイルを削除
 ```
