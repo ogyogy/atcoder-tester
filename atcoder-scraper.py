@@ -40,7 +40,6 @@ if args.clean:
 if args.url:
     target_url = args.url
     testcase_dir = 'testcase'
-    sourcename = 'main'
 
     if not os.path.isdir(testcase_dir):
         os.makedirs(testcase_dir)
@@ -98,15 +97,21 @@ if args.url:
             out_idx += 1
 
 if args.test:
+    sourcename = 'main'
+
+    cpp_file_exists = os.path.exists('{}.cpp'.format(sourcename))
+    py_file_exists = os.path.exists('{}.py'.format(sourcename))
+
     # compile
-    print('==========\nBUILD\n==========')
-    cmd = 'g++ {}.cpp'.format(sourcename)
-    res = subprocess.run(cmd, stdout=subprocess.PIPE,
-                         stderr=subprocess.STDOUT, shell=True)
-    if res.returncode != 0:
-        print(res.stdout.decode('sjis'))
-        exit()
-    print(Fore.GREEN + 'BUILD SUCCESS')
+    if cpp_file_exists:
+        print('==========\nBUILD\n==========')
+        cmd = 'g++ {}.cpp'.format(sourcename)
+        res = subprocess.run(cmd, stdout=subprocess.PIPE,
+                             stderr=subprocess.STDOUT, shell=True)
+        if res.returncode != 0:
+            print(res.stdout.decode('sjis'))
+            exit()
+        print(Fore.GREEN + 'BUILD SUCCESS')
     # run test
     print('==========\nTEST\n==========')
     ac_cnt = 0
@@ -116,7 +121,10 @@ if args.test:
     for i in range(1, testcase_num + 1):
         in_path = os.path.join(testcase_dir, 'input{}.txt'.format(i))
         out_path = os.path.join(testcase_dir, 'output{}.txt'.format(i))
-        cmd = 'a.exe < {}'.format(in_path)
+        if cpp_file_exists:
+            cmd = 'a.exe < {}'.format(in_path)
+        elif py_file_exists:
+            cmd = 'python {}.py < {}'.format(sourcename, in_path)
         print('input{}.txt '.format(i), end='')
         res = subprocess.run(cmd, stdout=subprocess.PIPE,
                              stderr=subprocess.STDOUT, shell=True)
