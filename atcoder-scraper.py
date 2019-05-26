@@ -137,13 +137,15 @@ if args.test:
             if ans == expected:
                 print(Fore.BLACK + Back.GREEN + 'AC')
                 if args.debug:
-                    print(Fore.GREEN + 'expected = {}'.format(expected))
-                    print(Fore.GREEN + 'answer = {}'.format(ans))
+                    print(Fore.GREEN +
+                          '---expected---\n{}\n[EOF]\n'.format(expected))
+                    print(Fore.GREEN + '---answer---\n{}\n[EOF]\n'.format(ans))
                 ac_cnt += 1
             else:
                 print(Fore.BLACK + Back.YELLOW + 'WA')
-                print(Fore.YELLOW + 'expected = {}'.format(expected))
-                print(Fore.YELLOW + 'answer = {}'.format(ans))
+                print(Fore.YELLOW +
+                      '---expected---\n{}\n[EOF]\n'.format(expected))
+                print(Fore.YELLOW + '---answer---\n{}\n[EOF]\n'.format(ans))
                 wa_cnt += 1
     print('==========\nRESULT\n==========')
     print('AC = {}, WA = {}'.format(ac_cnt, wa_cnt), end=' ')
