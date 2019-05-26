@@ -132,9 +132,9 @@ if args.test:
             print(res.stdout.decode('sjis'))
             exit()
         with open(out_path, 'r') as f:
-            expected = f.read().rstrip()
-            ans = res.stdout.decode().rstrip()
-            if ans.strip() == expected.strip():
+            expected = f.read().replace('\r', '')
+            ans = res.stdout.decode().replace('\r', '')
+            if ans == expected:
                 print(Fore.BLACK + Back.GREEN + 'AC')
                 if args.debug:
                     print(Fore.GREEN + 'expected = {}'.format(expected))
