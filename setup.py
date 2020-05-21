@@ -20,4 +20,9 @@ setuptools.setup(
     ],
     python_requires='>=3.6',
     install_requires=['requests', 'beautifulsoup4', 'colorama'],
+    entry_points={
+        'console_scripts': [
+            'atcoder-scraper = atcoderscraper.__main__:main',
+        ],
+    },
 )
