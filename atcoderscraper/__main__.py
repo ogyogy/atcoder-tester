@@ -42,11 +42,6 @@ def main():
 
     if args.url:
         target_url = args.url
-        testcase_dir = 'testcase'
-
-        if not os.path.isdir(testcase_dir):
-            os.makedirs(testcase_dir)
-
         login_url = 'https://atcoder.jp/login/'
 
         s = requests.Session()
@@ -79,6 +74,10 @@ def main():
         else:
             print(Fore.RED + 'GET FAILURE {} {}'.format(r.status_code, r.reason))
             exit()
+
+        testcase_dir = 'testcase'
+        if not os.path.isdir(testcase_dir):
+            os.makedirs(testcase_dir)
 
         in_idx = 1
         out_idx = 1
