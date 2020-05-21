@@ -13,7 +13,7 @@ pip install git+https://github.com/ogyogy/atcoder-scraper
 ## Usage
 
 ```sh
-atcoder-scraper.py [-h] [-u URL] [-t] [-d] [-c]
+atcoder-scraper [-h] [-t] [-d] [-c] url
 ```
 
 ## Contributing
