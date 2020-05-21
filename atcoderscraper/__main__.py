@@ -55,7 +55,7 @@ def main():
         soup = BeautifulSoup(r.text, 'html.parser')
         csrf_token = soup.find(attrs={'name': 'csrf_token'}).get('value')
 
-        with open('setting.json', 'r') as f:
+        with open('settings.json', 'r') as f:
             d = json.load(f)
             payload = {
                 'csrf_token': csrf_token,

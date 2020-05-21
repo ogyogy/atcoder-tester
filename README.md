@@ -10,9 +10,18 @@ Use the package manager [pip](https://pip.pypa.io/en/stable/) to install foobar.
 pip install git+https://github.com/ogyogy/atcoder-scraper
 ```
 
+Create a file called settings.json and add the following content.
+
+```json
+{
+    "username": "your username",
+    "password": "your password"
+}
+```
+
 ## Usage
 
-```sh
+```bash
 atcoder-scraper [-h] [-t] [-d] [-c] url
 ```
 
