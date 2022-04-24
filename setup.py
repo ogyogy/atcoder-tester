@@ -4,14 +4,14 @@ with open('README.md', 'r') as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name='atcoder-scraper',
+    name='atcoder-tester',
     version='0.0.1',
     author='ogyogy',
     author_email='',
-    description='atcoder-scraper is a Python library to support automated testing of Atcoder.',
+    description='atcoder-tester is a Python library to support automated testing of Atcoder.',
     long_description=long_description,
     long_description_content_type='text/markdown',
-    url='https://github.com/ogyogy/atcoder-scraper',
+    url='https://github.com/ogyogy/atcoder-tester',
     packages=setuptools.find_packages(),
     classifiers=[
         'Programming Language :: Python :: 3',
@@ -22,7 +22,7 @@ setuptools.setup(
     install_requires=['requests', 'beautifulsoup4', 'colorama'],
     entry_points={
         'console_scripts': [
-            'atcoder-scraper = atcoderscraper.__main__:main',
+            'atcoder-tester = atcodertester.__main__:main',
         ],
     },
 )
