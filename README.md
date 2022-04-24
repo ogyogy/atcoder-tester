@@ -4,7 +4,7 @@ atcoder-tester is a Python library to support automated testing of Atcoder.
 
 ## Installation
 
-Use the package manager [pip](https://pip.pypa.io/en/stable/) to install foobar.
+Use the package manager [pip](https://pip.pypa.io/en/stable/) to install atcoder-tester.
 
 ```bash
 pip install git+https://github.com/ogyogy/atcoder-tester
