@@ -1,13 +1,13 @@
-# atcoder-scraper
+# atcoder-tester
 
-atcoder-scraper is a Python library to support automated testing of Atcoder.
+atcoder-tester is a Python library to support automated testing of Atcoder.
 
 ## Installation
 
 Use the package manager [pip](https://pip.pypa.io/en/stable/) to install foobar.
 
 ```bash
-pip install git+https://github.com/ogyogy/atcoder-scraper
+pip install git+https://github.com/ogyogy/atcoder-tester
 ```
 
 Create a file called settings.json and add the following content.
@@ -22,7 +22,7 @@ Create a file called settings.json and add the following content.
 ## Usage
 
 ```bash
-atcoder-scraper [-h] [-t] [-d] [-c] url
+atcoder-tester [-h] [-t] [-d] [-c] url
 ```
 
 ## Contributing
@@ -31,4 +31,4 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 Please make sure to update tests as appropriate.
 
 ## License
-[MIT](https://github.com/ogyogy/atcoder-scraper/blob/master/LICENSE)
+[MIT](https://github.com/ogyogy/atcoder-tester/blob/master/LICENSE)
